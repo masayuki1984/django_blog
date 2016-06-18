@@ -1,10 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block main %}
+    <h4>Make new entry</h4>
+
+    <form class="form-inline" role="form" method="post" action=".">{% csrf_token %}
+        <div class="form-group" style="padding-bottom:10px;">
+            <label class="sr-only" for="id_title">TITLE</label>
+            <input id="id_title" class="form-control" maxlength="200" name="title" type="text" placeholder="Type a title">
+        </div> <!-- form-group -->
+
+        <div class="form-group">
+            <label class="sr-only" for="id_content">CONTENT</label>
+            <textarea cols="70" id="id_content" class="form-control" name="content" rows="10" placeholder="Type a content"></textarea>
+        </div> <!-- form-group -->
+
+        <div class="form-group" style="padding-top:10px;">
+            <button type="submit" class="btn btn-primary"><i class="fa fa-save"></i>SAVE</button>
+        </div> <!-- form-group -->
+    </form>
+{% endblock %}

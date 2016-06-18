@@ -1,1 +1,52 @@
-Top page
+{% extends 'base.html' %}
+
+{% block main %}
+
+    {% if user.is_anonymous %}
+        You are not member
+    {% else %}
+        Hello ! {{ user.username }}
+    {% endif %}
+
+    {% for item in all_posts %}
+
+
+        <div class="blog-post">
+            <h2 class="blog-post-title">{{ item }}</h2>
+            <p class="blog-post-meta"><i class="fa fa-clock-o"></i>{{ item.pub_date }}</p>
+
+            <p>{{ item.content|slice:"30" }}</p>
+
+            <a href="{% url 'detail' item.id %}"><i class="fa fa-eye"></i>See more</a>
+
+        </div><!-- /.blog-post -->
+
+    {% endfor %}
+
+    <nav>
+        <ul class="pagination">
+            <!-- PREVIOUS -->
+            {% if all_posts.has_previous %}
+                <li><a href="?page={{ all_posts.previous_page_number }}">Previous</a></li>
+            {% endif %}
+            <!-- PREVIOUS -->
+
+            <!-- PAGE NUM -->
+            {% for number in all_posts.paginator.page_range %}
+                {% ifequal number all_posts.number %}
+                    <li class="active"><a href="?page={{ number }}">{{ number }}</a></li>
+                {% else %}
+                    <li><a href="?page={{ number }}">{{ number }}</a></li>
+                {% endifequal %}
+            {% endfor %}
+            <!-- PAGE NUM -->
+
+            <!-- NEXT -->
+            {% if all_posts.has_next %}
+                <li><a href="?page={{ all_posts.next_page_number }}">Next</a></li>
+            {% endif %}
+            <!-- NEXT -->
+        </ul>
+    </nav>
+
+{% endblock %}

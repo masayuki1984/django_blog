@@ -1,10 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block main %}
+
+    <div class="blog-post">
+        <h2 class="blog-post-title">{{ post.title }}</h2>
+        <p class="blog-post-meta">{{ post.pub_date }}</p>
+        <hr>
+        <div style="font-size:20px;">{{ post.content|linebreaks }}</div>
+
+        {% if user.is_superuser %}
+        <div class="row">
+            <form method="post" action="{% url 'edit_entry' post.id %}" class="col-xs-2">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary"><i class="fa fa-edit"></i>Edit</button>
+            </form>
+
+            <form method="post" action="{% url 'delete_entry' post.id %}" class="col-xs-2">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger"><i class="fa fa-trash-o"></i>Delete</button>
+            </form>
+        </div> <!-- row -->
+        {% endif %}
+
+        <hr>
+
+        <!-- AMOUNT OF LETTERS -->
+        <div class="row">
+            <div class="col-sm-12">
+                <h3 style="color:#ccc;">This is expressed by <strong>{{ post.get_total }}</strong> letters</h3>
+            </div>
+        </div>
+
+        <div class="row" style="margin-top:30px;">
+            <div class="col-sm-4">
+                <!-- NEW POST -->
+                {% if new_post %}
+                    <a href="{% url 'detail' new_post.id %}">
+                        <i class="fa fa-arrow-circle-left fa-lg">NEW</i>
+                    </a>
+                {% endif %}
+            </div>
+
+            <div class="col-sm-4">
+                <!-- OLD POST -->
+                {% if old_post %}
+                    <a href="{% url 'detail' old_post.id %}">
+                        <i class="fa fa-arrow-circle-right fa-lg">OLD</i>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div><!-- /.blog-post -->
+{% endblock %}

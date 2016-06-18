@@ -1,10 +1,39 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block main %}
+
+    <div class="row">
+        <!-- PROFILE IMAGE -->
+        <div class="col-sm-4">
+            <img src="{{ STATIC_URL }}images/python.png/" width="100px;">
+        </div>
+
+        <!-- NAME -->
+        <div class="col-sm-8" style="margin-top:30px;">
+            <h1>MASAYUKI KATO</h1>
+        </div>
+    </div> <!-- row -->
+
+    <!-- DESCRIPTION -->
+    <div class="row" style="margin-top: 20px;">
+        <div class="col-sm-12">
+            <p>
+                Welcome to my first bloc. I'm a webmaster of this blog.
+                My hobby is to make something with computer.
+                <br>
+                Thank you for visiting my blog!!
+            </p>
+        </div>
+    </div> <!-- row -->
+
+    <!-- MINI INFO -->
+    <div class="row">
+        <div class="col-sm-3"><i class="fa fa-globe">Japan</i></div>
+        <div class="col-sm-4">
+            <i class="fa fa-github"><a href="https://github.com/masayuki1984" target="_blank">My Github Page</a></i>
+        </div>
+        <div class="col-sm-5">
+            <i class="fa fa-facebook-square"><a href="https://www.facebook.com/masayiki.katou" target="_blank">My Facebook</a></i>
+        </div>
+    </div>
+{% endblock %}

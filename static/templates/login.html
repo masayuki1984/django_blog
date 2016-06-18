@@ -1,10 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'base.html' %}
 
-</body>
-</html>
+{% block main %}
+    {% if form.errors %}
+        <h3 class="bg-danger">Please type a correct password.</h3>
+    {% endif %}
+    <br>
+
+    <form method='post' action='.' role="form">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="username">USER ID</label>
+            <input id="id_username" maxlength="254" name="username" type="text" class="form-control">
+        </div><!-- form-group -->
+
+        <div class="form-group">
+            <label for="password">PASSWORD</label>
+            <input id="id_password" maxlength="4096" name="password" type="password" class="form-control">
+        </div><!-- form-group -->
+        <input type="submit" value="LOGIN" class="btn btn-warning">
+    </form>
+{% endblock %}
